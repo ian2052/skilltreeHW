@@ -1,0 +1,36 @@
+﻿@model SkillTree_MVC_HomeWork.Models.ViewModels.AccountViewModel
+
+@*@{
+        ViewBag.Title = "Output";
+    }
+
+    <h2>Output</h2>*@
+
+@*@string.Format("您傳進來的是【{0}】", Model.Memo)
+    @string.Format("您傳進來的是【】")*@
+
+
+<table class="table table-striped table-bordered table-hover">
+    <tr style="background-color: #E8EEF4;">
+        <td>#</td>
+        <td>類別</td>
+        <td>日期</td>
+        <td>金額</td>
+        <td>備註</td>
+    </tr>
+
+    @{ int count = 1;}
+
+    @foreach (var item in ViewData["lstAccount"] as List<SkillTree_MVC_HomeWork.Models.ViewModels.AccountViewModel>)
+    {
+        <tr>
+            <td>@count</td>
+            <td>@Html.DisplayFor(modelItem => item.Type)</td>
+            <td>@Html.DisplayFor(modelItem => item.Date)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cost)</td>
+            <td>@Html.DisplayFor(modelItem => item.Memo)</td>
+        </tr>
+        count++;
+    }
+
+</table>
