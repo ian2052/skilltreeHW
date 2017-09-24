@@ -14,36 +14,57 @@ namespace SkillTree_MVC_HomeWork.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            Random rand = new Random();
-            var source = new AccountViewModel
+            var lst =new List<AccountViewModel>() ;
+
+            using (Models.SkillTreeHomeworkEntities db = new Models.SkillTreeHomeworkEntities())
             {
-                // Type = "類別",
-                //Type = Enum.GetName(typeof(Types), rand.Next(2)),
-                Cost = 100,
-                Date = DateTime.Now,
-                Memo = "TEST"
 
-            };
-            int typeFlag = 0;
-            DateTime dTime = DateTime.Today;
-
-            var lst = new List<AccountViewModel>();
-
-            for (int i = 0; i < 1000; i++)
-            {
-                typeFlag = rand.Next(2);
-
-                var temp = new AccountViewModel
+                foreach (var item in db.AccountBook.ToList())
                 {
-                    Type = Enum.GetName(typeof(AccountViewModel.Types), typeFlag),
-                    Cost = rand.Next(500),
-                    Date = dTime.AddDays(rand.Next(-60,0)),
-                    Memo = typeFlag==0? Enum.GetName(typeof(AccountViewModel.incomeRemark), rand.Next(3)) : Enum.GetName(typeof(AccountViewModel.costRemark), rand.Next(4))
-                };
-                lst.Add(temp);
+                    var temp = new AccountViewModel
+                    {
+                        Type = Enum.GetName(typeof(AccountViewModel.Types), item.Categoryyy),
+                        Cost = item.Amounttt,
+                        Date = item.Dateee,
+                        Memo = item.Remarkkk
+                    };
+                    lst.Add(temp);
+                }
+
+
             }
 
-            //source.dt.Add();
+
+            //Random rand = new Random();
+            //var source = new AccountViewModel
+            //{
+            //    // Type = "類別",
+            //    //Type = Enum.GetName(typeof(Types), rand.Next(2)),
+            //    Cost = 100,
+            //    Date = DateTime.Now,
+            //    Memo = "TEST"
+
+            //};
+            //int typeFlag = 0;
+            //DateTime dTime = DateTime.Today;
+
+            //var lst = new List<AccountViewModel>();
+
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    typeFlag = rand.Next(2);
+
+            //    var temp = new AccountViewModel
+            //    {
+            //        Type = Enum.GetName(typeof(AccountViewModel.Types), typeFlag),
+            //        Cost = rand.Next(500),
+            //        Date = dTime.AddDays(rand.Next(-60,0)),
+            //        Memo = typeFlag==0? Enum.GetName(typeof(AccountViewModel.incomeRemark), rand.Next(3)) : Enum.GetName(typeof(AccountViewModel.costRemark), rand.Next(4))
+            //    };
+            //    lst.Add(temp);
+            //}
+
+            ////source.dt.Add();
 
             ViewData["lstAccount"] = lst;
 
