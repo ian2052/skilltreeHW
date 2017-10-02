@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
+using SkillTree_MVC_HomeWork.Models;
 
 namespace SkillTree_MVC_HomeWork.Controllers
 {
@@ -69,6 +70,29 @@ namespace SkillTree_MVC_HomeWork.Controllers
             ViewData["lstAccount"] = lst;
 
             return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "Type,Cost,Date,Memo")] AccountViewModel accountViewModel)
+        {
+            //AccountViewModel accountViewModel = ViewData["Account"] as SkillTree_MVC_HomeWork.Models.ViewModels.AccountViewModel;
+            Models.SkillTreeHomeworkEntities db = new Models.SkillTreeHomeworkEntities();
+            Models.AccountBook accountBook = new AccountBook();
+            accountBook.Id = Guid.NewGuid();
+            accountBook.Categoryyy = accountViewModel.Type=="支出"?1:0;
+            accountBook.Amounttt = accountViewModel.Cost;
+            accountBook.Dateee = accountViewModel.Date;
+            accountBook.Remarkkk = accountViewModel.Memo;
+            if (ModelState.IsValid)
+            {
+                db.AccountBook.Add(accountBook);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(accountBook);
         }
     }
 }

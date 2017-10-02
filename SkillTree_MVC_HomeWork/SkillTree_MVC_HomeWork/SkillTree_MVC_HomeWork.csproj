@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Models\ViewModels\AccountViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidateAttribute\DayRangeAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SkillTreeHomework.mdf" />

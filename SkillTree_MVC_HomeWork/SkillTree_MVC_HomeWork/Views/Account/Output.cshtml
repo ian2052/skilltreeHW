@@ -9,6 +9,17 @@
 @*@string.Format("您傳進來的是【{0}】", Model.Memo)
     @string.Format("您傳進來的是【】")*@
 
+@helper DisplayType(string type)
+{
+if (type == "支出")
+{
+        <span style="color:crimson">支出</span>
+}
+else
+{
+        <span style="color:cornflowerblue">收入</span>
+}
+}
 
 <table class="table table-striped table-bordered table-hover">
     <tr style="background-color: #E8EEF4;">
@@ -23,9 +34,11 @@
 
     @foreach (var item in ViewData["lstAccount"] as List<SkillTree_MVC_HomeWork.Models.ViewModels.AccountViewModel>)
     {
+        
         <tr>
             <td>@count</td>
-            <td>@Html.DisplayFor(modelItem => item.Type)</td>
+            <td>@DisplayType(item.Type)</td>
+            @*<td>@Html.DisplayFor(modelItem => @DisplayType(item.Type))</td>*@
             <td>@Html.DisplayFor(modelItem => item.Date)</td>
             <td>@Html.DisplayFor(modelItem => item.Cost)</td>
             <td>@Html.DisplayFor(modelItem => item.Memo)</td>
