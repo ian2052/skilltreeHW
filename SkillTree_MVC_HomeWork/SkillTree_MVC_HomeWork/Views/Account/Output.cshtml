@@ -32,18 +32,23 @@ else
 
     @{ int count = 1;}
 
-    @foreach (var item in ViewData["lstAccount"] as List<SkillTree_MVC_HomeWork.Models.ViewModels.AccountViewModel>)
-    {
-        
-        <tr>
-            <td>@count</td>
-            <td>@DisplayType(item.Type)</td>
-            @*<td>@Html.DisplayFor(modelItem => @DisplayType(item.Type))</td>*@
-            <td>@Html.DisplayFor(modelItem => item.Date)</td>
-            <td>@Html.DisplayFor(modelItem => item.Cost)</td>
-            <td>@Html.DisplayFor(modelItem => item.Memo)</td>
-        </tr>
-        count++;
+    @{ if (ViewData["lstAccount"] != null)
+        {
+            foreach (var item in ViewData["lstAccount"] as List<SkillTree_MVC_HomeWork.Models.ViewModels.AccountViewModel>)
+            {
+
+                <tr>
+                    <td>@count</td>
+                    <td>@DisplayType(item.Type)</td>
+                    @*<td>@Html.DisplayFor(modelItem => @DisplayType(item.Type))</td>*@
+                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cost)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Memo)</td>
+                </tr>
+                count++;
+            }
+        }
     }
+        
 
 </table>

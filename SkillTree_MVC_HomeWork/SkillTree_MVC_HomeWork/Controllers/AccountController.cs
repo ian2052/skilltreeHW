@@ -92,7 +92,7 @@ namespace SkillTree_MVC_HomeWork.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(accountBook);
+            return View(accountViewModel);
         }
     }
 }
